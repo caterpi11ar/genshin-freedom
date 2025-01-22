@@ -1,6 +1,6 @@
 {
   "name": "genshin-freedom",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "云原神每日领取月卡（空月祝福）",
   "author": "caterpi11ar",
   "license": "ISC",
@@ -30,6 +30,10 @@
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist/*.js",
+    "dist/*.ts"
+  ],
   "devDependencies": {
     "@antfu/eslint-config": "^3.16.0",
     "@types/node": "^22.10.7",

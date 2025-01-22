@@ -21,3 +21,5 @@ pnpm install genshin-freedom -g
 ```bash
 genshin-start
 ```
+
+初次使用会弹出云原神网页，登录完成后，后续可正常使用
