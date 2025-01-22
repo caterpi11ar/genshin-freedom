@@ -1,0 +1,42 @@
+{
+  "name": "genshin-freedom",
+  "version": "1.0.1",
+  "description": "云原神每日领取月卡（空月祝福）",
+  "author": "caterpi11ar",
+  "license": "ISC",
+  "keywords": [
+    "hosted",
+    "genshin-impact",
+    "原神",
+    "月卡",
+    "空月祝福"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "bin": {
+    "genshin-start": "./bin/index.js"
+  },
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "test": "vitest  --run",
+    "lint": "eslint . --fix",
+    "prebuild": "npm run test",
+    "build": "tsc"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "devDependencies": {
+    "@antfu/eslint-config": "^3.16.0",
+    "@types/node": "^22.10.7",
+    "eslint": "^9.18.0",
+    "puppeteer": "^24.1.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.3"
+  }
+}

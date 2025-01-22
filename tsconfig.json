@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "CommonJS",
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "declaration": true,
+    "resolveJsonModule": true,
+    "declarationDir": "./dist",
+    "isolatedModules": true,
+    "incremental": true,
+    "outDir": "./dist", // 设置输出目录
+    "rootDir": "./src" // 设置源代码目录
+  },
+  "include": ["src/*.ts"],
+  "exclude": ["node_modules"]
+}
