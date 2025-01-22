@@ -19,5 +19,5 @@ pnpm install genshin-freedom -g
 ## 使用
 
 ```bash
-genshin-freedom start
+genshin-start
 ```
