@@ -45,3 +45,11 @@ jobs:
           name: release_on_${{ matrix.os }}
           path: release/
           retention-days: 5
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref }}  # 使用当前标签作为版本
+          files: release/**  # 发布构建的文件
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub Token
