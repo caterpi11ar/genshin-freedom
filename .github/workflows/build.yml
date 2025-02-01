@@ -37,7 +37,7 @@ jobs:
       - name: Build Release Files
         run: npm run build
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.MMC_GITHUB_TOKEN }}
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
@@ -52,4 +52,4 @@ jobs:
           tag_name: ${{ github.ref }}  # 使用当前标签作为版本
           files: release/**  # 发布构建的文件
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub Token
+          GITHUB_TOKEN: ${{ secrets.MMC_GITHUB_TOKEN }}  # GitHub Token
