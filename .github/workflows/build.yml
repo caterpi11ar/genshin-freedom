@@ -51,4 +51,4 @@ jobs:
         with:
           tag_name: bate
           files: release/** # 发布构建的文件
-          token: ${{ secrets.MMC_GITHUB_TOKEN }} # GitHub Token
+          token: ${{ secrets.GITHUB_TOKEN }} # GitHub Token
