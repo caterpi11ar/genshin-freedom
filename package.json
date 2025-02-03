@@ -12,7 +12,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && electron-builder",
+    "clean": "rimraf dist dist-electron release",
+    "build": "npm run clean && tsc && vite build && electron-builder",
     "preview": "vite preview",
     "pretest": "vite build --mode=test",
     "test": "vitest run"
@@ -32,6 +33,7 @@
     "electron-builder": "^25.1.8",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "rimraf": "^6.0.1",
     "typescript": "^5.4.2",
     "vite": "^5.4.11",
     "vite-plugin-electron": "^0.29.0",
