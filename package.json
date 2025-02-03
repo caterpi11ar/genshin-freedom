@@ -35,7 +35,7 @@
     "autoprefixer": "^10.4.20",
     "electron": "^33.2.0",
     "electron-builder": "^25.1.8",
-    "react": "^18.3.1",
+    "react": "^19.0.0",
     "react-dom": "^18.3.1",
     "rimraf": "^6.0.1",
     "typescript": "^5.4.2",
