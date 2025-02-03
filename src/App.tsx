@@ -1,23 +1,34 @@
-import { useState } from "react";
-import "./App.css";
-import { useEffect } from "react";
+import { useState, useCallback, useEffect } from "react";
+import { Button, Input, Layout, Space } from "antd";
 import LogComponent, { Log } from "./components/Log";
-import { useCallback } from "react";
 import { IpcRendererEvent } from "electron";
+import TaskList from "./components/Task";
+
+const { Header, Sider, Content } = Layout;
+
+const tasks = [
+  { label: "领取月卡", value: "auto" },
+  { label: "邮件奖励[待开发]", value: "email" },
+  { label: "前瞻兑换码[待开发]", value: "code" },
+  { label: "执行自定义脚本[待开发]", value: "custom_script" },
+];
 
 function App() {
-  const [uid, setUid] = useState("223607222");
+  const [selectedTasks, setSelectedTasks] = useState<string[]>(['auto']);
+  const [loading, setLoading] = useState(false);
+  const [uid, setUid] = useState("");
   const [logs, setLogs] = useState<Log[]>([]);
 
   const handle = async () => {
-    if (!uid) return;
-    const response = await window.ipcRenderer.invoke("launch", uid);
-    console.log(response);
+    if (!uid || loading) return;
+    setLoading(true);
+    await window.ipcRenderer.invoke("launch", uid);
+    setLoading(false);
   };
 
   const handleLogUpdate = useCallback(
     (_e: IpcRendererEvent, message: string) => {
-      setLogs((prevLogs) => [...prevLogs, { timestamp: new Date(), message }]);
+      setLogs((prevLogs) => [...prevLogs, message]);
     },
     []
   );
@@ -33,19 +44,34 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <h1>Freedom</h1>
-      <LogComponent logs={logs} />
-      <div className="card">
-        <input
-          type="text"
-          value={uid}
-          onChange={(e) => setUid(e.target.value)}
-          placeholder="输入uid"
-        />
-        <button onClick={handle}>原神 启动！</button>
-      </div>
-    </div>
+    <Layout style={{ width: "100vw" }}>
+      <Header>
+        <Space.Compact style={{ width: "100%" }}>
+          <Button disabled>设置</Button>
+          <Input
+            value={uid}
+            onChange={(e) => setUid(e.target.value)}
+            placeholder="输入uid"
+          />
+          <Button type="primary" onClick={handle}>
+            登录
+          </Button>
+        </Space.Compact>
+      </Header>
+      <Layout>
+        <Sider width={300}>
+          <TaskList
+            tasks={tasks}
+            selectedValues={selectedTasks}
+            setSelectedValues={setSelectedTasks}
+          />
+        </Sider>
+
+        <Content>
+          <LogComponent logs={logs} />
+        </Content>
+      </Layout>
+    </Layout>
   );
 }
 

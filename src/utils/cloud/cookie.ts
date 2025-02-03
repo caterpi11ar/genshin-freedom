@@ -1,5 +1,27 @@
 import type { Cookie } from "puppeteer";
-import { readConfigSync, updateConfigSync } from '../config';
+import { readConfigSync, updateConfigSync } from "../config";
+
+/**
+ * 将 Cookie 字符串格式化为 JSON 对象
+ * @param cookieString - 原始 Cookie 字符串
+ * @returns 格式化后的 JSON 对象
+ */
+export const parseCookies = (cookieString: string): Record<string, string> => {
+  const cookies: Record<string, string> = {};
+
+  // 分割 Cookie 字符串为单个 Cookie
+  const cookieArray = cookieString.split("; ");
+
+  // 遍历每个 Cookie
+  cookieArray.forEach((cookie) => {
+    const [key, value] = cookie.split("=");
+    if (key && value) {
+      cookies[decodeURIComponent(key)] = decodeURIComponent(value);
+    }
+  });
+
+  return cookies;
+};
 
 /** 根据 UID 获取 Cookie */
 export function getCookieByUid(uid: string): Cookie[] {

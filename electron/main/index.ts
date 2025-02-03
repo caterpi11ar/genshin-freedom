@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 import os from "node:os";
 import { update } from "./update";
-import { launch } from "./cloud";
+import { launch } from '../../src/utils/cloud'
 import pkg from "../../package.json";
 
 const require = createRequire(import.meta.url);
@@ -49,6 +49,8 @@ async function createWindow() {
   win = new BrowserWindow({
     title: `${pkg.name} ${pkg.version}`,
     icon: path.join(process.env.VITE_PUBLIC, "favicon.ico"),
+    width: 600,
+    height: 400,
     webPreferences: {
       preload,
       // Warning: Enable nodeIntegration and disable contextIsolation is not secure in production
