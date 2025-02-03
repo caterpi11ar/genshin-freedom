@@ -4,7 +4,7 @@ import LogComponent, { Log } from "./components/Log";
 import { IpcRendererEvent } from "electron";
 import TaskList from "./components/Task";
 
-const { Header, Sider, Content } = Layout;
+const { Header, Content } = Layout;
 
 const tasks = [
   { label: "领取月卡", value: "auto" },
@@ -14,7 +14,7 @@ const tasks = [
 ];
 
 function App() {
-  const [selectedTasks, setSelectedTasks] = useState<string[]>(['auto']);
+  const [selectedTasks, setSelectedTasks] = useState<string[]>(["auto"]);
   const [loading, setLoading] = useState(false);
   const [uid, setUid] = useState("");
   const [logs, setLogs] = useState<Log[]>([]);
@@ -44,7 +44,7 @@ function App() {
   }, []);
 
   return (
-    <Layout style={{ width: "100vw" }}>
+    <Layout style={{ width: "100vw", height: '100vh', overflow: "hidden", display: "flex" }}>
       <Header>
         <Space.Compact style={{ width: "100%" }}>
           <Button disabled>设置</Button>
@@ -58,19 +58,18 @@ function App() {
           </Button>
         </Space.Compact>
       </Header>
-      <Layout>
-        <Sider width={300}>
+      <Content style={{ display: "flex", flex: 1 }}>
+        <div style={{ flex: 1 }}>
           <TaskList
             tasks={tasks}
             selectedValues={selectedTasks}
             setSelectedValues={setSelectedTasks}
           />
-        </Sider>
-
-        <Content>
+        </div>
+        <div style={{ flex: 1 }}>
           <LogComponent logs={logs} />
-        </Content>
-      </Layout>
+        </div>
+      </Content>
     </Layout>
   );
 }

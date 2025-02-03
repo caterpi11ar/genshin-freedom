@@ -3,8 +3,8 @@ import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import os from "node:os";
-import { launch } from '@/utils/cloud'
-import pkg from "@/../package.json";
+import { launch } from "../../src/utils/cloud";
+import pkg from "../../package.json";
 
 // const require = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -50,6 +50,10 @@ async function createWindow() {
     icon: path.join(process.env.VITE_PUBLIC, "favicon.ico"),
     width: 600,
     height: 400,
+    titleBarStyle: "default",
+    resizable: false, // 禁用调整窗口大小，通常会隐藏最大化按钮
+    maximizable: false, // 禁用最大化操作
+    autoHideMenuBar: true, // 隐藏菜单栏
     webPreferences: {
       preload,
       // Warning: Enable nodeIntegration and disable contextIsolation is not secure in production
@@ -82,8 +86,8 @@ async function createWindow() {
   });
 
   ipcMain.handle("launch", async (event, uid) => {
-    await launch(uid, event)
-    return true
+    await launch(uid, event);
+    return true;
   });
 }
 

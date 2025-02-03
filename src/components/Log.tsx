@@ -14,7 +14,7 @@ const LogComponent: FC<LogComponentProps> = ({ logs }) => {
     <TextArea
       defaultValue="logs..."
       value={logs.join("\n")}
-      style={{ width: 300, height: 300 }}
+      style={{ height: "100%" }}
     />
   );
 };

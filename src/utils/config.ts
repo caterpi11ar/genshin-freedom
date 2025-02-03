@@ -2,11 +2,10 @@ import path from "node:path";
 import os from "node:os";
 import fs from "node:fs";
 import pkg from "../../package.json";
-import { Cookie } from "puppeteer";
 
 interface IConfig {
   
-  cookies?: Record<string, Cookie[]>;
+  cookies?: Record<string, string>;
 }
 
 /** 获取配置文件路径 */

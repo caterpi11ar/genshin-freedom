@@ -14,7 +14,7 @@ const TaskList: React.FC<TaskListProps> = ({
 }) => {
   return (
     <List
-      style={{ height: 300, overflowY: "auto" }}
+      style={{ height: '100%', overflowY: "auto" }}
       bordered
       dataSource={tasks}
       renderItem={(item) => (

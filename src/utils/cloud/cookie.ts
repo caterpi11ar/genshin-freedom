@@ -1,33 +1,23 @@
 import type { Cookie } from "puppeteer";
 import { readConfigSync, updateConfigSync } from "../config";
 
-/**
- * 将 Cookie 字符串格式化为 JSON 对象
- * @param cookieString - 原始 Cookie 字符串
- * @returns 格式化后的 JSON 对象
- */
-export const parseCookies = (cookieString: string): Record<string, string> => {
-  const cookies: Record<string, string> = {};
+/** 对数据进行 Base64 编码（仅用于混淆，并不是真正的加密） */
+export function obfuscateCookie(data: Cookie[]): string {
+  return Buffer.from(JSON.stringify(data), "utf8").toString("base64");
+}
 
-  // 分割 Cookie 字符串为单个 Cookie
-  const cookieArray = cookieString.split("; ");
-
-  // 遍历每个 Cookie
-  cookieArray.forEach((cookie) => {
-    const [key, value] = cookie.split("=");
-    if (key && value) {
-      cookies[decodeURIComponent(key)] = decodeURIComponent(value);
-    }
-  });
-
-  return cookies;
-};
+/** 对 Base64 编码的数据进行解码 */
+export function deobfuscateCookie(obfuscatedData: string): Cookie[] {
+  if (!obfuscatedData) return []
+  return JSON.parse(Buffer.from(obfuscatedData, "base64").toString("utf8"))
+}
 
 /** 根据 UID 获取 Cookie */
 export function getCookieByUid(uid: string): Cookie[] {
   const config = readConfigSync();
   const cookies = config.cookies ?? {};
-  return cookies[uid] ?? [];
+  
+  return deobfuscateCookie(cookies[uid])
 }
 
 /**
@@ -42,7 +32,7 @@ export async function updateCookies(uid: string, cookie?: Cookie[]) {
   if (!cookie) {
     delete cookies[uid]; // 如果没有提供 cookie，则删除该 UID 的 cookie
   } else {
-    cookies[uid] = cookie; // 更新或添加 cookie
+    cookies[uid] = obfuscateCookie(cookie); // 更新或添加 cookie
   }
 
   updateConfigSync({ cookies }); // 更新配置
