@@ -36,7 +36,7 @@
     "electron": "^33.2.0",
     "electron-builder": "^25.1.8",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react-dom": "^19.0.0",
     "rimraf": "^6.0.1",
     "typescript": "^5.4.2",
     "vite": "^5.4.11",
