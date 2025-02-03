@@ -3,11 +3,10 @@ import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import os from "node:os";
-import { update } from "./update";
-import { launch } from '../../src/utils/cloud'
-import pkg from "../../package.json";
+import { launch } from '@/utils/cloud'
+import pkg from "@/../package.json";
 
-const require = createRequire(import.meta.url);
+// const require = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // The built directory structure
@@ -81,9 +80,6 @@ async function createWindow() {
     if (url.startsWith("https:")) shell.openExternal(url);
     return { action: "deny" };
   });
-
-  // Auto update
-  update(win);
 
   ipcMain.handle("launch", async (event, uid) => {
     await launch(uid, event)

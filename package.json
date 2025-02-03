@@ -3,6 +3,11 @@
   "version": "0.0.1",
   "main": "dist-electron/main/index.js",
   "description": "云原神每日领取月卡（空月祝福）",
+  "keywords": [
+    "原神",
+    "云原神",
+    "月卡"
+  ],
   "author": "caterpi11ar",
   "debug": {
     "env": {
@@ -20,7 +25,6 @@
   },
   "dependencies": {
     "antd": "^5.23.3",
-    "electron-updater": "^6.3.9",
     "puppeteer": "^24.1.1"
   },
   "devDependencies": {
